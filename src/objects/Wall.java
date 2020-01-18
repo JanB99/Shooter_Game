@@ -7,9 +7,10 @@ import java.awt.*;
 
 public class Wall extends GameObject {
 
-    public Wall(float x, float y, int w, int h, ID id) {
+    public Wall(float x, float y, int w, int h, ID id, int velX, int velY) {
         super(x, y, w, h, id);
-        velX = 1;
+        this.velX = velX;
+        this.velY = velY;
     }
 
     @Override

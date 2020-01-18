@@ -1,9 +1,6 @@
 package com.company;
 
-import objects.BasicEnemy;
-import objects.ID;
-import objects.Player;
-import objects.Wall;
+import objects.*;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -26,7 +23,9 @@ public class Game extends Canvas implements Runnable {
 
         handler = new Handler(this);
         handler.addGameObject(new Player(WIDTH/2, HEIGHT/2, 16, 16, ID.Player, keyInput, handler));
-        handler.addGameObject(new Wall(100, 150, 100,100, ID.Wall));
+        handler.addGameObject(new Wall(100, 150, 100,100, ID.Wall, 1, 0));
+        handler.addGameObject(new Wall(30, 300, 20,150, ID.Wall, 0, 1));
+        handler.addGameObject(new BasicEnemy(200, 200, 20, 20, ID.Enemy, handler.findPlayer(), handler, 20, 5, EnemyID.Strong));
 
 //        cam = new Camera(handler);
         spawner = new Spawn(handler);

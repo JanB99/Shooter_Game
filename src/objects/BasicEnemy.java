@@ -12,11 +12,13 @@ public class BasicEnemy extends LivingGameObject {
     private Player player;
     private Handler handler;
     private float maxVel;
+    public EnemyID enemyID;
 
-    public BasicEnemy(float x, float y, int w, int h, ID id, Player player, Handler handler) {
-        super(x, y, w, h, id, 10, 2);
+    public BasicEnemy(float x, float y, int w, int h, ID id, Player player, Handler handler, int hp, int dmg, EnemyID enemyID) {
+        super(x, y, w, h, id, hp, dmg);
         this.player = player;
         this.handler = handler;
+        this.enemyID = enemyID;
         maxVel = 1;
     }
 
@@ -49,6 +51,14 @@ public class BasicEnemy extends LivingGameObject {
 
         if (hp <= 0){
             isDead = true;
+        }
+
+        if (enemyID != EnemyID.Basic && System.nanoTime() % 4000 == 0){
+            float angle = (float) Math.atan2(player.y - y - 10, player.x - x - 10);
+            float dx = (float) (Math.cos(angle) * 3);
+            float dy = (float) (Math.sin(angle) * 3);
+
+            handler.addGameObject(new Bullet(x + w/2, y + h/2, 8, 8, ID.Bullet, dx, dy, this, handler));
         }
     }
 

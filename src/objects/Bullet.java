@@ -2,6 +2,7 @@ package objects;
 
 import abstractObjects.LivingGameObject;
 import abstractObjects.GameObject;
+import com.company.Game;
 import com.company.Handler;
 
 import java.awt.*;
@@ -28,6 +29,10 @@ public class Bullet extends GameObject {
         for (int i = handler.gameObjects.size() - 1; i >= 0; i--){
 
             GameObject obj = handler.gameObjects.get(i);
+
+            if (obj.x + w > Game.WIDTH || obj.x < 0 || obj.y + h > Game.HEIGHT || obj.y < 0){
+                isDead = true;
+            }
 
             if (owner.id == ID.Player && obj.id == ID.Enemy && collision(obj)){
                 isDead = true;
